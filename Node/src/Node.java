@@ -11,22 +11,32 @@ public class Node {
     }
 
     /**
-     * リストの末尾に追加する
+     * リストの末尾に値を追加する。
+     * nextがnullになるまで探し、nullになったら新しいNodeをつけるだけ。
      * @param data
      */
     void appendToTail(int data){
         Node end = new Node(data);
         Node n = this;
-        System.out.println(n);
         while( n.next != null ){
             n = n.next;
         }
         n.next = end;
     }
 
+    /**
+     * ノードを削除する。
+     * ノードnが与えられ、それが削除したいdataだった場合は、単純にノードの先頭を移動する。そうでなければ、nextがnullになるまで探す。
+     * nextのdataが削除したい値だった場合は、nextを次の値に置き換えるだけ。（n.next = n.next.nextがそれにあたる行為）
+     * @param head
+     * @param data
+     * @return
+     */
     Node deleteNode(Node head, int data){
         Node n = head;
-        if( n.data == data ) return head.next;
+        if( n.data == data ){
+            return head.next;//ノードの先頭を移動する
+        }
         while ( n.next != null ){
             if( n.next.data == data ){
                 n.next = n.next.next;
